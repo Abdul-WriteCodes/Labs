@@ -1,760 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AWC Labs | AI Innovation and Data Analytics Studio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Omolade Adeyemi — Public Health Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root{
+  --midnight:#0a1628;
+  --navy:#0f2240;
+  --blue-mid:#1a4a6e;
+  --blue-light:#2d6ea0;
+  --paper:#f0f4f9;
+  --paper-dark:#dde4ee;
+  --yellow:#e8c547;
+  --yellow-dim:#c9a830;
+  --red:#e85d3a;
+  --white:#ffffff;
+  --text-main:#0a1628;
+  --text-muted:#5a6a7e;
+  --text-dim:#8494a8;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+}
 
-    :root {
-      --bg:       #050810;
-      --surface:  #0b0f1e;
-      --border:   rgba(0,240,255,0.10);
-      --cyan:     #00f0ff;
-      --cyan2:    #0af5c8;
-      --amber:    #f5a623;
-      --text:     #c8d6e8;
-      --muted:    #607080;
-      --white:    #eef4ff;
-      --card:     rgba(11,15,30,0.85);
-      --glow:     0 0 14px rgba(0,240,255,0.45);
-    }
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--midnight);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-    html { scroll-behavior: smooth; }
+/* ─── CURSOR GLOW ─── */
+.cursor-glow{
+  position:fixed;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(26,74,110,0.18) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;z-index:0;
+  transform:translate(-50%,-50%);transition:left 0.08s,top 0.08s;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;height:68px;
+  background:rgba(10,22,40,0.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  transition:background 0.3s;
+}
+.nav-mark{
+  font-family:var(--serif);font-size:1.1rem;
+  font-weight:400;color:var(--white);letter-spacing:0.03em;
+  text-decoration:none;display:flex;align-items:center;gap:0.5rem;
+}
+.nav-mark span{color:var(--yellow);font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{
+  font-size:0.78rem;font-weight:500;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(255,255,255,0.5);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--yellow)}
+.nav-cta{
+  display:inline-block;padding:0.5rem 1.2rem;
+  border:1px solid rgba(232,197,71,0.5);border-radius:100px;
+  font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--yellow);text-decoration:none;
+  transition:all 0.22s;
+}
+.nav-cta:hover{background:var(--yellow);color:var(--midnight)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.3s}
 
-    /* ─── GRID NOISE BACKGROUND ─── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      z-index: 0;
-      pointer-events: none;
-    }
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 6% 80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+  pointer-events:none;
+}
+.hero-bg-accent{
+  position:absolute;right:-200px;top:10%;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(26,74,110,0.35) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-chapter{
+  font-family:var(--sans);font-size:0.7rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-chapter::before{content:'';display:block;width:32px;height:1px;background:var(--yellow)}
 
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,240,255,0.07) 0%, transparent 70%);
-      z-index: 0;
-      pointer-events: none;
-    }
+.hero-declaration{
+  font-family:var(--serif);
+  font-size:clamp(2.8rem,6.5vw,5.8rem);
+  font-weight:300;line-height:1.08;
+  letter-spacing:-0.01em;
+  color:var(--white);
+  max-width:900px;
+  margin-bottom:1.5rem;
+}
+.hero-declaration em{font-style:italic;color:var(--yellow)}
+.hero-declaration .line{
+  display:block;overflow:hidden;
+}
+.hero-declaration .line span{
+  display:block;
+  transform:translateY(110%);
+  transition:transform 0.85s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-declaration .line span.in{transform:translateY(0)}
 
-    * { position: relative; z-index: 1; }
+.hero-name-row{
+  display:flex;align-items:baseline;gap:1.5rem;
+  margin-bottom:2.5rem;
+  opacity:0;transform:translateY(12px);
+  transition:all 0.6s ease 1.2s;
+}
+.hero-name-row.in{opacity:1;transform:translateY(0)}
+.hero-name{
+  font-family:var(--serif);font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:400;color:rgba(255,255,255,0.55);letter-spacing:0.06em;
+}
+.hero-name strong{color:var(--white);font-weight:600}
+.hero-name-sep{width:1px;height:20px;background:rgba(255,255,255,0.2)}
 
-    /* ─── NAV ─── */
-    nav {
-      position: sticky; top: 0;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      height: 68px;
-      background: rgba(5,8,16,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-    }
+.hero-tags{
+  display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:3rem;
+  opacity:0;transition:opacity 0.6s ease 1.5s;
+}
+.hero-tags.in{opacity:1}
+.htag{
+  font-size:0.75rem;font-weight:500;letter-spacing:0.06em;
+  padding:0.35rem 0.9rem;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.55);
+  transition:all 0.2s;cursor:default;
+}
+.htag:hover{border-color:var(--yellow);color:var(--yellow)}
 
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: 0.05em;
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--cyan); }
+.hero-actions{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;transition:opacity 0.6s ease 1.7s;
+}
+.hero-actions.in{opacity:1}
+.btn-hero-primary{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.9rem 2rem;border-radius:100px;
+  background:var(--yellow);color:var(--midnight);
+  font-size:0.85rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.22s;
+  box-shadow:0 4px 24px rgba(232,197,71,0.3);
+}
+.btn-hero-primary:hover{background:#f5d24a;transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,197,71,0.4)}
+.btn-hero-outline{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.9rem 2rem;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.2);
+  color:var(--white);font-size:0.85rem;font-weight:500;
+  text-decoration:none;transition:all 0.22s;
+}
+.btn-hero-outline:hover{border-color:rgba(255,255,255,0.5);transform:translateY(-2px)}
 
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--cyan); }
+.hero-scroll-hint{
+  position:absolute;bottom:3rem;left:6%;
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  opacity:0;transition:opacity 0.6s ease 2.2s;
+}
+.hero-scroll-hint.in{opacity:1}
+.scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2)}
 
-    .nav-cta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 500;
-      border: 1px solid var(--cyan);
-      color: var(--cyan);
-      padding: 0.45rem 1.2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      transition: background .2s, color .2s;
-    }
-    .nav-cta:hover { background: var(--cyan); color: var(--bg); }
+/* ─── SECTION SHELL ─── */
+.section-shell{padding:100px 6%}
+.section-shell.light-bg{background:var(--paper);color:var(--text-main)}
+.section-shell.navy-bg{background:var(--navy)}
+.section-shell.mid-bg{background:#0c1e38}
+.inner{max-width:1160px;margin:0 auto}
 
-    .hamburger {
-      display: none;
-      flex-direction: column; gap: 5px;
-      cursor: pointer; background: none; border: none; padding: 4px;
-    }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cyan); border-radius: 2px; transition: .3s; }
+.chapter-label{
+  display:flex;align-items:center;gap:1rem;
+  font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:1.2rem;
+}
+.chapter-label::before{content:attr(data-num);font-family:var(--serif);font-size:1rem;font-weight:300;font-style:italic;color:rgba(232,197,71,0.4)}
 
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      background: rgba(5,8,16,0.97);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
-      gap: 1.25rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: color .2s;
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { color: var(--cyan); }
+.section-headline{
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300;line-height:1.15;
+  margin-bottom:3.5rem;
+}
+.section-headline em{font-style:italic;color:var(--yellow)}
+.section-headline.dark{color:var(--text-main)}
+.section-headline.light{color:var(--white)}
 
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 92vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
-      gap: 1.5rem;
-    }
+/* ─── ABOUT / MISSION ─── */
+.mission-grid{display:grid;grid-template-columns:1fr 420px;gap:6rem;align-items:start}
+.mission-pull{
+  font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.65rem);
+  font-weight:300;line-height:1.6;color:var(--text-main);
+  border-left:3px solid var(--yellow);padding-left:1.8rem;
+  margin-bottom:2.5rem;font-style:italic;
+}
+.mission-body p{
+  font-size:0.95rem;line-height:1.85;color:var(--text-muted);
+  margin-bottom:1.2rem;
+}
+.mission-body p strong{color:var(--text-main);font-weight:600}
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cyan2);
-      border: 1px solid rgba(10,245,200,0.25);
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      background: rgba(10,245,200,0.06);
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--cyan2);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.4); }
-    }
+.mission-aside{}
+.sdg-block{
+  background:var(--midnight);border-radius:16px;
+  padding:1.8rem;margin-bottom:1.5rem;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.sdg-block-label{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:1rem;
+}
+.sdg-goals{display:flex;gap:0.6rem;flex-wrap:wrap}
+.sdg-pill{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:10px;
+  font-size:0.62rem;font-weight:700;text-align:center;line-height:1.2;
+  text-transform:uppercase;letter-spacing:0.03em;
+  transition:transform 0.2s;cursor:default;
+}
+.sdg-pill:hover{transform:scale(1.08)}
+.sdg-2{background:#dda63a;color:#fff}
+.sdg-3{background:#4c9f38;color:#fff}
+.sdg-4{background:#c5192d;color:#fff}
+.sdg-6{background:#26bde2;color:#fff}
 
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3.2rem, 9vw, 7.5rem);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: transparent;
-      -webkit-text-stroke: 1.5px var(--cyan);
-    }
+.competency-cloud{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem}
+.cc-tag{
+  font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:6px;
+  background:rgba(26,74,110,0.12);color:var(--blue-mid);
+  border:1px solid rgba(26,74,110,0.2);font-weight:500;
+}
 
-    .hero-sub {
-      max-width: 540px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.75;
-    }
+/* ─── STATS BAR ─── */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  margin-bottom:4rem;
+}
+.stat-cell{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(255,255,255,0.06);
+  transition:background 0.2s;
+}
+.stat-cell:last-child{border-right:none}
+.stat-cell:hover{background:rgba(255,255,255,0.02)}
+.stat-n{
+  font-family:var(--serif);font-size:3rem;font-weight:300;
+  color:var(--yellow);line-height:1;margin-bottom:0.4rem;
+}
+.stat-l{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.5}
 
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+/* ─── EXPERIENCE ─── */
+.exp-timeline{position:relative;padding-left:2px}
+.exp-item{
+  display:grid;grid-template-columns:200px 1fr;
+  gap:3rem;padding:2.8rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  position:relative;
+}
+.exp-item:last-child{border-bottom:none}
+.exp-item::before{
+  content:'';position:absolute;left:-2px;top:3.2rem;
+  width:2px;height:calc(100% - 3.2rem);
+  background:rgba(255,255,255,0.04);
+}
+.exp-item::after{
+  content:'';position:absolute;left:-6px;top:3rem;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--midnight);border:2px solid var(--yellow);
+}
+.exp-meta{}
+.exp-period{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.08em;
+  color:var(--yellow);text-transform:uppercase;
+  margin-bottom:0.4rem;display:block;
+}
+.exp-location{font-size:0.75rem;color:rgba(255,255,255,0.3)}
+.exp-body{}
+.exp-org{
+  font-family:var(--serif);font-size:1.5rem;font-weight:400;
+  color:var(--white);margin-bottom:0.25rem;
+}
+.exp-role{
+  font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:1rem;
+}
+.exp-desc{font-size:0.9rem;line-height:1.8;color:rgba(255,255,255,0.55)}
+.exp-skills{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+.exp-skill-tag{
+  font-size:0.7rem;padding:0.22rem 0.6rem;border-radius:4px;
+  background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);
+  border:1px solid rgba(255,255,255,0.08);
+}
 
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: var(--cyan);
-      color: var(--bg);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.85rem 2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: filter .2s, transform .2s;
-      border: none; cursor: pointer;
-    }
-    .btn-primary:hover { filter: brightness(1.15); transform: translateY(-2px); }
+/* ─── EDUCATION ─── */
+.edu-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem}
+.edu-card{
+  background:var(--white);border-radius:20px;padding:2.4rem;
+  border-top:3px solid var(--midnight);
+  transition:transform 0.25s,box-shadow 0.25s;
+  position:relative;overflow:hidden;
+}
+.edu-card::after{
+  content:'';position:absolute;bottom:0;right:0;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(10,22,40,0.03);
+  transform:translate(30px,30px);
+  pointer-events:none;
+}
+.edu-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(10,22,40,0.12)}
+.edu-badge{
+  display:inline-block;font-size:0.65rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  background:rgba(26,74,110,0.08);color:var(--blue-mid);
+  padding:0.25rem 0.65rem;border-radius:4px;margin-bottom:1rem;
+}
+.edu-inst{font-family:var(--serif);font-size:1.5rem;color:var(--midnight);margin-bottom:0.3rem}
+.edu-degree{font-size:0.82rem;font-weight:600;color:var(--text-muted);margin-bottom:1.2rem}
+.edu-detail{font-size:0.85rem;line-height:1.75;color:var(--text-muted)}
+.edu-highlight{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(232,197,71,0.12);border-radius:6px;
+  padding:0.4rem 0.8rem;margin-top:0.8rem;
+  font-size:0.8rem;font-weight:600;color:#7a5c00;
+}
 
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      background: transparent;
-      color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      padding: 0.85rem 2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 1px solid rgba(200,214,232,0.18);
-      transition: border-color .2s, color .2s, transform .2s;
-    }
-    .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+.certs-section{margin-top:1rem}
+.certs-heading{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:1rem;
+}
+.cert-grid{display:flex;flex-wrap:wrap;gap:0.6rem}
+.cert-item{
+  display:flex;align-items:center;gap:0.5rem;
+  background:var(--white);border:1px solid var(--paper-dark);
+  border-radius:10px;padding:0.65rem 1rem;
+  font-size:0.8rem;color:var(--text-main);font-weight:500;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.cert-item:hover{border-color:var(--blue-mid);transform:translateY(-2px)}
+.cert-icon{color:var(--blue-mid);font-size:0.85rem}
 
-    .hero-stats {
-      display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      width: 100%;
-      max-width: 600px;
-    }
-    .stat-item { text-align: center; }
-    .stat-number {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-    .stat-number span { color: var(--cyan); }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+/* ─── SKILLS ─── */
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.skill-group-title{
+  font-family:var(--serif);font-size:1.5rem;font-weight:300;
+  color:var(--white);margin-bottom:1.8rem;font-style:italic;
+}
+.skill-row{margin-bottom:1.4rem}
+.skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.skill-name-txt{font-size:0.85rem;color:rgba(255,255,255,0.7);font-weight:500}
+.skill-pct{font-size:0.75rem;color:var(--yellow);font-weight:600}
+.skill-track{height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
+.skill-fill{height:100%;border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)}
+.sf-primary{background:linear-gradient(90deg,var(--blue-mid),var(--yellow))}
+.sf-secondary{background:linear-gradient(90deg,#2d6ea0,#5ba3d0)}
 
-    /* ─── SECTIONS ─── */
-    section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem); }
+.tool-list{display:flex;flex-direction:column;gap:0.75rem}
+.tool-entry{
+  display:flex;align-items:center;gap:1rem;
+  padding:0.85rem 1.1rem;border-radius:10px;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);
+  transition:all 0.2s;
+}
+.tool-entry:hover{background:rgba(255,255,255,0.06);border-color:rgba(232,197,71,0.2)}
+.tool-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(26,74,110,0.3);display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;flex-shrink:0;
+}
+.tool-name{font-size:0.85rem;color:rgba(255,255,255,0.65);font-weight:400}
 
-    .section-header {
-      text-align: center;
-      margin-bottom: clamp(3rem, 5vw, 5rem);
-    }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.9rem, 4vw, 3rem);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .section-desc {
-      margin-top: 1rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+/* ─── CONTACT ─── */
+#contact{background:var(--midnight);padding:100px 6% 80px;text-align:center}
+.contact-headline{
+  font-family:var(--serif);font-size:clamp(2rem,5vw,4rem);
+  font-weight:300;line-height:1.1;color:var(--white);
+  margin-bottom:1.2rem;
+}
+.contact-headline em{font-style:italic;color:var(--yellow)}
+.contact-sub{
+  font-size:1rem;color:rgba(255,255,255,0.45);
+  max-width:540px;margin:0 auto 3.5rem;line-height:1.7;
+}
+.contact-grid{
+  display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;
+  margin-bottom:3.5rem;
+}
+.contact-tile{
+  display:flex;align-items:center;gap:1rem;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:1.3rem 1.8rem;
+  text-decoration:none;transition:all 0.22s;min-width:220px;
+  text-align:left;
+}
+.contact-tile:hover{background:rgba(232,197,71,0.08);border-color:rgba(232,197,71,0.3);transform:translateY(-3px)}
+.ct-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(26,74,110,0.4);display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.ct-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:0.2rem}
+.ct-value{font-size:0.88rem;color:var(--white)}
+.btn-contact-main{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:1rem 2.5rem;border-radius:100px;
+  background:var(--yellow);color:var(--midnight);
+  font-size:0.9rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.22s;
+  box-shadow:0 4px 30px rgba(232,197,71,0.35);
+}
+.btn-contact-main:hover{background:#f5d24a;transform:translateY(-3px);box-shadow:0 8px 40px rgba(232,197,71,0.45)}
 
-    /* ─── ABOUT GRID ─── */
-    .about-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
+/* ─── FOOTER ─── */
+footer{
+  background:#060e1a;text-align:center;
+  padding:2rem 6%;border-top:1px solid rgba(255,255,255,0.04);
+  font-size:0.75rem;color:rgba(255,255,255,0.2);letter-spacing:0.04em;
+}
 
-    .about-cell {
-      padding: 2.5rem;
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
-      transition: background .3s;
-    }
-    .about-cell:hover { background: rgba(0,240,255,0.04); }
+/* ─── REVEAL ANIMATION ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.in{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.in{opacity:1;transform:translateX(0)}
 
-    .about-cell-icon {
-      width: 42px; height: 42px;
-      background: rgba(0,240,255,0.08);
-      border: 1px solid rgba(0,240,255,0.2);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      color: var(--cyan);
-      margin-bottom: 1.25rem;
-    }
-    .about-cell h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-    }
-    .about-cell p { font-size: 0.9rem; color: var(--text); line-height: 1.75; }
-
-    .about-cell-full { grid-column: 1 / -1; }
-
-    /* ─── SPECIALIZATION ─── */
-    .spec-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      max-width: 900px;
-      margin: 2rem auto 0;
-    }
-    .spec-item {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.9rem 1.25rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.88rem;
-      color: var(--text);
-      font-weight: 500;
-      transition: border-color .2s, color .2s;
-    }
-    .spec-item:hover { border-color: rgba(0,240,255,0.35); color: var(--white); }
-    .spec-item i { color: var(--cyan2); width: 16px; text-align: center; flex-shrink: 0; }
-
-    /* ─── DOMAINS ─── */
-    .domains-grid {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      justify-content: center;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .domain-chip {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.6rem 1.25rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--text);
-      background: var(--card);
-      transition: border-color .2s, color .2s, transform .2s;
-    }
-    .domain-chip:hover { border-color: var(--cyan); color: var(--white); transform: scale(1.04); }
-    .domain-chip i { font-size: 0.85rem; }
-
-    /* ─── PROJECTS ─── */
-    .projects-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 2rem;
-      display: flex; flex-direction: column;
-      transition: transform .3s, border-color .3s, box-shadow .3s;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0,240,255,0.25);
-      box-shadow: 0 16px 40px rgba(0,240,255,0.08);
-    }
-
-    .project-tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.75rem;
-      border-radius: 4px;
-      margin-bottom: 1.25rem;
-      font-weight: 500;
-      width: fit-content;
-    }
-    .tag-live { background: rgba(0,245,200,0.12); color: var(--cyan2); border: 1px solid rgba(0,245,200,0.25); }
-    .tag-dev  { background: rgba(3,169,244,0.12); color: #3bbbf5; border: 1px solid rgba(3,169,244,0.25); }
-    .tag-proto{ background: rgba(245,166,35,0.12); color: var(--amber); border: 1px solid rgba(245,166,35,0.25); }
-
-    .project-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      margin-bottom: 0.75rem;
-    }
-    .project-card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.75;
-      flex-grow: 1;
-    }
-
-    .project-card-footer {
-      margin-top: 1.75rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-    }
-    .project-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: gap .2s;
-    }
-    .project-link:hover { gap: 0.8rem; }
-    .link-live  { color: var(--cyan2); }
-    .link-dev   { color: #3bbbf5; }
-    .link-proto { color: var(--muted); pointer-events: none; }
-
-    /* ─── DIVIDER ─── */
-    .divider {
-      max-width: 1100px;
-      margin: 0 auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-    }
-
-    /* ─── CONTACT ─── */
-    .contact-wrapper {
-      max-width: 700px; margin: 0 auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: clamp(2rem, 5vw, 3.5rem);
-      text-align: center;
-    }
-    .contact-wrapper p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .contact-links {
-      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
-      margin-top: 2rem;
-    }
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--text);
-      background: rgba(255,255,255,0.03);
-      transition: border-color .2s, color .2s, transform .2s;
-    }
-    .contact-link:hover { transform: translateY(-3px); }
-    .contact-link.email:hover  { border-color: #ff6b6b; color: #ff6b6b; }
-    .contact-link.whatsapp:hover { border-color: #25d366; color: #25d366; }
-    .contact-link.linkedin:hover { border-color: #0077b5; color: #0077b5; }
-    .contact-link.facebook:hover { border-color: #1877f2; color: #1877f2; }
-
-    /* ─── SUPPORT ─── */
-    .support-row {
-      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
-      margin-top: 2.5rem;
-    }
-    .support-link {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.82rem; font-weight: 600;
-      text-decoration: none;
-      padding: 0.6rem 1.25rem;
-      border-radius: 999px;
-      transition: opacity .2s;
-    }
-    .support-link:hover { opacity: 0.8; }
-    .support-coffee { background: rgba(255,216,87,0.1); color: #ffd857; border: 1px solid rgba(255,216,87,0.25); }
-    .support-selar  { background: rgba(255,90,90,0.1); color: #ff7b7b; border: 1px solid rgba(255,90,90,0.25); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      text-align: center;
-      padding: 2rem clamp(1.5rem, 5vw, 4rem);
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-    footer span { color: var(--cyan); }
-
-    /* ─── FADE-IN ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .about-grid { grid-template-columns: 1fr; }
-      .about-cell-full { grid-column: auto; }
-      .hero-stats { gap: 2rem; }
-    }
-  </style>
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .mission-grid{grid-template-columns:1fr}
+  .mission-aside{display:none}
+  .stats-bar{grid-template-columns:repeat(2,1fr)}
+  .stat-cell{border-bottom:1px solid rgba(255,255,255,0.06)}
+  .exp-item{grid-template-columns:1fr;gap:0.8rem}
+  .exp-item::before,.exp-item::after{display:none}
+  .edu-layout{grid-template-columns:1fr}
+  .skills-layout{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{
+    display:none;flex-direction:column;
+    position:fixed;top:68px;left:0;right:0;
+    background:rgba(10,22,40,0.98);backdrop-filter:blur(12px);
+    padding:2rem 6%;gap:1.5rem;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open{display:flex}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .contact-grid{flex-direction:column;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-declaration .line span{transition:none}
+  .reveal,.reveal-left,.reveal-right,.skill-fill,.cursor-glow{transition:none}
+  .cursor-glow{display:none}
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ── NAV ── -->
-  <nav>
-    <a class="nav-logo" href="#">AWC<span> Labs</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a class="nav-cta" href="#contact">Get in Touch →</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-mark">Omolade <span>Adeyemi</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Work With Me</a></li>
+  </ul>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-accent"></div>
+
+  <div class="hero-chapter" data-num="">Public Health · Project Management · SDG Advocacy</div>
+
+  <h1 class="hero-declaration">
+    <span class="line"><span>Building healthier</span></span>
+    <span class="line"><span>communities — one</span></span>
+    <span class="line"><span>intervention at a <em>time.</em></span></span>
+  </h1>
+
+  <div class="hero-name-row">
+    <div class="hero-name"><strong>Omolade Adeyemi</strong> — Public Health Professional</div>
+    <div class="hero-name-sep"></div>
+    <div class="hero-name">Abuja, Nigeria</div>
   </div>
 
-  <!-- ── HERO ── -->
-  <header class="hero">
-    <div class="hero-badge">AI Innovation Studio</div>
-    <h1>Intelligent<br>Systems for<br><em>Real Impact</em></h1>
-    <p class="hero-sub">AWC Labs builds and delivers AI/ML-powered systems, products, and platforms—bridging the gap between cutting-edge research and real-world deployment.</p>
-    <div class="hero-actions">
-      <a class="btn-primary" href="#projects"><i class="fas fa-rocket"></i> Explore Projects</a>
-      <a class="btn-ghost" href="#about"><i class="fas fa-info-circle"></i> Learn About Us</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number">5<span>+</span></div>
-        <div class="stat-label">Active Projects</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">6<span>+</span></div>
-        <div class="stat-label">Domains Served</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">Innovation Drive</div>
-      </div>
-    </div>
-  </header>
+  <div class="hero-tags">
+    <span class="htag">BSc Health Education (Hons)</span>
+    <span class="htag">PMP Certified</span>
+    <span class="htag">HSE Levels 1–3</span>
+    <span class="htag">First Aid · Red Cross</span>
+    <span class="htag">SDG Champion</span>
+    <span class="htag">Fashion Founder</span>
+    <span class="htag">YouTube Educator</span>
+  </div>
 
-  <!-- ── ABOUT ── -->
-  <section id="about">
-    <div class="section-header reveal">
-      <span class="section-label">// who we are</span>
-      <h2 class="section-title">Built Around AI. Focused on People.</h2>
-      <p class="section-desc">We combine machine intelligence with human-centred design to solve problems that matter.</p>
-    </div>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-hero-primary">
+      <span>Let's Work Together</span>
+      <span>→</span>
+    </a>
+    <a href="#experience" class="btn-hero-outline">View My Record</a>
+  </div>
 
-    <div class="about-grid reveal">
-      <div class="about-cell">
-        <div class="about-cell-icon"><i class="fas fa-bullseye"></i></div>
-        <h3>Our Mission</h3>
-        <p>To create AI-powered systems and solutions for individuals and businesses—helping them overcome everyday challenges, operate more efficiently, and build sustainable long-term operations.</p>
+  <div class="hero-scroll-hint">
+    <span class="scroll-line"></span>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar reveal" id="statsBar">
+  <div class="stat-cell">
+    <div class="stat-n">4.1</div>
+    <div class="stat-l">CGPA — First Class Honours<br/>University of Ilorin</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">4+</div>
+    <div class="stat-l">Years producing public health<br/>content on YouTube</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">5+</div>
+    <div class="stat-l">Years as Founder &amp; Creative<br/>Director, Òrékelẹ́wà Atelier</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">SDG</div>
+    <div class="stat-l">Active champion for Goals<br/>2 · 3 · 4 · 6</div>
+  </div>
+</div>
+
+<!-- ABOUT / MISSION -->
+<section class="section-shell light-bg" id="about">
+  <div class="inner">
+    <div class="chapter-label" data-num="01">The Mission</div>
+    <div class="section-headline dark reveal">
+      Where <em>science</em> meets <em>service</em>
+    </div>
+    <div class="mission-grid">
+      <div>
+        <blockquote class="mission-pull reveal">
+          "I don't just educate — I build systems that make communities permanently healthier."
+        </blockquote>
+        <div class="mission-body reveal">
+          <p>
+            I am a passionate public health professional with a <strong>Bachelor of Science in Health Education</strong> from the University of Ilorin — graduating with First Class Honours (4.1 GPA, 81.6%). My work sits at the intersection of evidence-based health education, strategic project execution, and community empowerment.
+          </p>
+          <p>
+            With hands-on experience at <strong>NAFDAC, Royal Lord Hospital</strong>, and the <strong>National Primary Health Care Development Agency</strong>, I have developed real expertise in healthcare project management, regulatory compliance, and community health education that delivers measurable outcomes.
+          </p>
+          <p>
+            I am actively pursuing global impact opportunities with organisations like <strong>WHO, ECOWAS, and the UN</strong>, where I can bring both technical depth and human understanding to health systems that serve millions.
+          </p>
+          <p>
+            Beyond health: I am the founder of <strong>Òrékelẹ́wà Atelier</strong> — a culturally inspired fashion brand — and the <strong>WAITT Initiative</strong>, driving mental health awareness and community well-being across Nigeria.
+          </p>
+          <div class="competency-cloud" style="margin-top:1.5rem">
+            <span class="cc-tag">Global Health</span>
+            <span class="cc-tag">Health Promotion</span>
+            <span class="cc-tag">Disease Prevention</span>
+            <span class="cc-tag">Program Evaluation</span>
+            <span class="cc-tag">Stakeholder Management</span>
+            <span class="cc-tag">Community Outreach</span>
+            <span class="cc-tag">Technical Assistance</span>
+            <span class="cc-tag">Data Collection &amp; Analysis</span>
+            <span class="cc-tag">Environmental Health</span>
+            <span class="cc-tag">Medical Care &amp; Support</span>
+          </div>
+        </div>
       </div>
-      <div class="about-cell">
-        <div class="about-cell-icon"><i class="fas fa-eye"></i></div>
-        <h3>Our Vision</h3>
-        <p>To be at the forefront of AI-driven global transformation, delivering cutting-edge solutions that shape a smarter, more equitable future for everyone.</p>
+
+      <div class="mission-aside reveal-right">
+        <div class="sdg-block">
+          <div class="sdg-block-label">SDG Champion — Active Goals</div>
+          <div class="sdg-goals">
+            <div class="sdg-pill sdg-2"><span>2</span><span>Zero Hunger</span></div>
+            <div class="sdg-pill sdg-3"><span>3</span><span>Good Health</span></div>
+            <div class="sdg-pill sdg-4"><span>4</span><span>Education</span></div>
+            <div class="sdg-pill sdg-6"><span>6</span><span>Clean Water</span></div>
+          </div>
+        </div>
+        <div class="sdg-block">
+          <div class="sdg-block-label">Approach</div>
+          <p style="font-size:0.88rem;color:rgba(255,255,255,0.5);line-height:1.7">
+            Raising awareness · Supporting cross-sector partnerships · Creating educational content around health &amp; wellness · Advancing community-led solutions
+          </p>
+        </div>
+        <a href="https://www.linkedin.com/in/adeyemiomolade" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:0.8rem;background:rgba(26,74,110,0.35);
+                  border:1px solid rgba(26,74,110,0.5);border-radius:12px;padding:1rem 1.2rem;
+                  text-decoration:none;transition:all 0.2s;margin-top:1rem"
+           onmouseover="this.style.background='rgba(26,74,110,0.55)'"
+           onmouseout="this.style.background='rgba(26,74,110,0.35)'">
+          <div style="width:36px;height:36px;border-radius:8px;background:#0077b5;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0">in</div>
+          <div>
+            <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:0.2rem">LinkedIn</div>
+            <div style="font-size:0.85rem;color:var(--white)">Connect with Omolade</div>
+          </div>
+          <span style="margin-left:auto;color:rgba(255,255,255,0.3);font-size:0.9rem">→</span>
+        </a>
       </div>
-      <div class="about-cell about-cell-full">
-        <div class="about-cell-icon"><i class="fas fa-flask"></i></div>
-        <h3>What We Do</h3>
-        <p>At AWC Labs we are building and delivering both traditional and advanced AI solutions—from intelligent systems and smart products to data-driven platforms. Every solution is engineered to solve complex challenges and create lasting value. Our core strengths span the full AI spectrum:</p>
-        <div class="spec-list" style="margin-top:1.5rem;">
-          <div class="spec-item"><i class="fas fa-check-circle"></i> End-to-End Machine Learning</div>
-          <div class="spec-item"><i class="fas fa-check-circle"></i> End-to-End Deep Learning</div>
-          <div class="spec-item"><i class="fas fa-check-circle"></i> Natural Language Processing</div>
-          <div class="spec-item"><i class="fas fa-check-circle"></i> Generative AI & LLM Integration</div>
-          <div class="spec-item"><i class="fas fa-check-circle"></i> AI & Embedded Technologies</div>
-          <div class="spec-item"><i class="fas fa-check-circle"></i> AI Research & Innovation</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section-shell" id="experience">
+  <div class="inner">
+    <div class="chapter-label" data-num="02">The Record</div>
+    <h2 class="section-headline light reveal">Where I've <em>created impact</em></h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">Jan 2025 – Present</span>
+          <div class="exp-location">Abuja, Nigeria · Contract</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Nigeria Youth SDGs Network</div>
+          <div class="exp-role">Associate</div>
+          <p class="exp-desc">Advocate for meaningful youth engagement in sustainable development, leading health education campaigns aligned with SDG 3 and supporting operations management initiatives across the network.</p>
+          <div class="exp-skills">
+            <span class="exp-skill-tag">Operations Management</span>
+            <span class="exp-skill-tag">Health Education</span>
+            <span class="exp-skill-tag">Youth Advocacy</span>
+            <span class="exp-skill-tag">SDG Programming</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">Jan 2025 – Present</span>
+          <div class="exp-location">Nigeria · Remote</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">WAITT Initiative</div>
+          <div class="exp-role">Founder &amp; Director</div>
+          <p class="exp-desc">Founded "We Are In This Together" — a community-first mental health and peer support initiative. Designed programming, partnerships, and outreach campaigns to reduce stigma and improve well-being among Nigerian youth.</p>
+          <div class="exp-skills">
+            <span class="exp-skill-tag">Mental Health Advocacy</span>
+            <span class="exp-skill-tag">Community Programming</span>
+            <span class="exp-skill-tag">Public Health</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">Jan 2022 – Present</span>
+          <div class="exp-location">Nigeria · Remote</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">YouTube</div>
+          <div class="exp-role">Health Educator &amp; Content Creator</div>
+          <p class="exp-desc">Produces accessible, evidence-based public health content that simplifies complex medical and health topics for everyday audiences. Built a consistent community around health literacy and preventive care.</p>
+          <div class="exp-skills">
+            <span class="exp-skill-tag">Health Literacy</span>
+            <span class="exp-skill-tag">Content Strategy</span>
+            <span class="exp-skill-tag">Video Production</span>
+            <span class="exp-skill-tag">Social Media</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">Nov 2023 – 2024</span>
+          <div class="exp-location">Abuja, Nigeria</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">NAFDAC (National Assembly)</div>
+          <div class="exp-role">Project Manager</div>
+          <p class="exp-desc">Contributed to regulatory compliance initiatives and public safety programmes. Managed project timelines, cross-functional teams, and stakeholder coordination to ensure impactful health policy execution at a national level.</p>
+          <div class="exp-skills">
+            <span class="exp-skill-tag">Regulatory Compliance</span>
+            <span class="exp-skill-tag">Project Management</span>
+            <span class="exp-skill-tag">Public Safety</span>
+            <span class="exp-skill-tag">Stakeholder Management</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <span class="exp-period">Oct 2020 – Present</span>
+          <div class="exp-location">Abuja, Nigeria</div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-org">Òrékelẹ́wà Atelier</div>
+          <div class="exp-role">Founder &amp; Creative Director</div>
+          <p class="exp-desc">Built a culturally inspired fashion brand from the ground up — celebrating Nigerian heritage, elegance, and individuality. Manages brand strategy, design direction, production, and digital marketing end-to-end.</p>
+          <div class="exp-skills">
+            <span class="exp-skill-tag">Brand Strategy</span>
+            <span class="exp-skill-tag">Creative Direction</span>
+            <span class="exp-skill-tag">Fashion Design</span>
+            <span class="exp-skill-tag">Digital Marketing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section-shell light-bg" id="education">
+  <div class="inner">
+    <div class="chapter-label" data-num="03">The Foundation</div>
+    <h2 class="section-headline dark reveal">Academic &amp; professional <em>credentials</em></h2>
+    <div class="edu-layout">
+      <div class="edu-card reveal">
+        <div class="edu-badge">Bachelor's Degree</div>
+        <div class="edu-inst">University of Ilorin</div>
+        <div class="edu-degree">BSc (Ed) in Health Education</div>
+        <div class="edu-detail">
+          Specialised in Public Health, Community Health Education, Epidemiology, and Health Promotion. Completed a capstone project on improving hostel sanitation for female students.
+        </div>
+        <div class="edu-highlight">🏅 First Class Honours — 4.1 GPA (81.6%)</div>
+      </div>
+      <div class="edu-card reveal" style="transition-delay:0.15s">
+        <div class="edu-badge">Secondary Education</div>
+        <div class="edu-inst">Federal Government Girls' College</div>
+        <div class="edu-degree">Science · Digital Girls Club (UN Partnership)</div>
+        <div class="edu-detail">
+          Early exposure to technology, leadership, and global development frameworks as part of the United Nations-affiliated Digital Girls Club — laying the foundation for a career in global health and sustainability.
         </div>
       </div>
     </div>
 
-    <!-- Domains -->
-    <div style="margin-top:4rem;" class="reveal">
-      <div class="section-header" style="margin-bottom:2rem;">
-        <span class="section-label">// where we operate</span>
-        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">Domains We Serve</h2>
-      </div>
-      <div class="domains-grid">
-        <div class="domain-chip"><i class="fas fa-heartbeat" style="color:#4ade80"></i> Healthcare</div>
-        <div class="domain-chip"><i class="fas fa-graduation-cap" style="color:#f87171"></i> Education</div>
-        <div class="domain-chip"><i class="fas fa-coins" style="color:#facc15"></i> Finance</div>
-        <div class="domain-chip"><i class="fas fa-store" style="color:#c084fc"></i> Retail</div>
-        <div class="domain-chip"><i class="fas fa-industry" style="color:#60a5fa"></i> Manufacturing</div>
-        <div class="domain-chip"><i class="fas fa-shopping-cart" style="color:#818cf8"></i> e-Commerce</div>
+    <div class="certs-section reveal">
+      <div class="certs-heading">Professional Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-item"><span class="cert-icon">✦</span>International Management Professional (PMP) — Novelle Organization</div>
+        <div class="cert-item"><span class="cert-icon">✦</span>HSE Level 1 — Health, Safety &amp; Environment</div>
+        <div class="cert-item"><span class="cert-icon">✦</span>HSE Level 2 — Health, Safety &amp; Environment</div>
+        <div class="cert-item"><span class="cert-icon">✦</span>HSE Level 3 — Health, Safety &amp; Environment</div>
+        <div class="cert-item"><span class="cert-icon">✦</span>First Aid Certification — Red Cross</div>
+        <div class="cert-item"><span class="cert-icon">✦</span>Basic Life Support (BLS)</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
-
-  <!-- ── PROJECTS ── -->
-  <section id="projects">
-    <div class="section-header reveal">
-      <span class="section-label">// what we're building</span>
-      <h2 class="section-title">Projects & Products</h2>
-      <p class="section-desc">Driven by data. Powered by innovation. Everything we build is designed to solve today's challenges and reimagine tomorrow.</p>
-    </div>
-
-    <div class="projects-grid">
-      <!-- CaptAI -->
-      <div class="project-card reveal">
-        <span class="project-tag tag-live">● Live</span>
-        <h3>CaptAI™</h3>
-        <p>A real-time ML-powered sentiment analysis platform engineered with a dual-model approach for enhanced accuracy. Leverages proprietary models Almirax and Alekxia to deliver nuanced insights from textual data streams.</p>
-        <div class="project-card-footer">
-          <!-- ADD YOUR LINK HERE -->
-          <a href="https://captai.streamlit.app/" class="project-link link-live" target="_blank">
-            <i class="fas fa-external-link-alt"></i> View Live Demo →
-          </a>
+<!-- SKILLS -->
+<section class="section-shell mid-bg" id="skills">
+  <div class="inner">
+    <div class="chapter-label" data-num="04">The Toolkit</div>
+    <h2 class="section-headline light reveal">What I bring to <em>every challenge</em></h2>
+    <div class="skills-layout">
+      <div class="reveal">
+        <div class="skill-group-title">Professional Skills</div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Public Health Education</span><span class="skill-pct">95%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-primary" data-w="95"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Project Management</span><span class="skill-pct">90%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-primary" data-w="90"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Content Creation &amp; Storytelling</span><span class="skill-pct">92%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-primary" data-w="92"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Strategic Communication</span><span class="skill-pct">88%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-primary" data-w="88"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Mental Health Advocacy</span><span class="skill-pct">87%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-primary" data-w="87"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Regulatory Compliance</span><span class="skill-pct">82%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-secondary" data-w="82"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-header"><span class="skill-name-txt">Team Leadership</span><span class="skill-pct">85%</span></div>
+          <div class="skill-track"><div class="skill-fill sf-secondary" data-w="85"></div></div>
         </div>
       </div>
 
-      <!-- Vitalyx-GPT -->
-      <div class="project-card reveal">
-        <span class="project-tag tag-dev">⬡ In Development</span>
-        <h3>Vitalyx-GPT</h3>
-        <p>An intelligent system for tracking and analyzing chronic indicators of cardiometabolic disorders—obesity, diabetes, hypertension. Powered by rule-based heuristics and LLM to alert risk patterns and provide conversational health support.</p>
-        <div class="project-card-footer">
-          <!-- ADD YOUR LINK HERE -->
-          <a href="https://github.com/Abdul-WriteCodes/Vitalyx-GPT" class="project-link link-dev" target="_blank">
-            <i class="fab fa-github"></i> View on GitHub →
-          </a>
-        </div>
-      </div>
-
-      <!-- EcoBudget -->
-      <div class="project-card reveal">
-        <span class="project-tag tag-proto">◎ Prototype Coming</span>
-        <h3>EcoBudget</h3>
-        <p>An AI-powered personal carbon pricing and environmental cost estimator. Enables users to estimate carbon footprint across energy, transportation, heating, and cooking fuels—helping make environmentally conscious decisions.</p>
-        <div class="project-card-footer">
-          <!-- ADD YOUR LINK HERE -->
-          <span class="project-link link-proto"><i class="fas fa-clock"></i> Coming Soon</span>
-        </div>
-      </div>
-
-      <!-- Alchemia-GPT -->
-      <div class="project-card reveal">
-        <span class="project-tag tag-proto">◎ Prototype Coming</span>
-        <h3>Alchemia-GPT</h3>
-        <p>An LLM-powered intelligent system for drug design and development. Suggests potential drug targets, proposes novel molecules, evaluates properties, and recommends synthetic routes—accelerating pharmaceutical innovation.</p>
-        <div class="project-card-footer">
-          <!-- ADD YOUR LINK HERE -->
-          <span class="project-link link-proto"><i class="fas fa-clock"></i> Coming Soon</span>
-        </div>
-      </div>
-
-      <!-- ForekastAI -->
-      <div class="project-card reveal">
-        <span class="project-tag tag-proto">◎ Prototype Coming</span>
-        <h3>ForekastAI</h3>
-        <p>A machine learning-powered asset valuation and future worth estimation system. Analyzes current asset values, performs scenario analysis, and predicts future worth using historical trends and economic indicators.</p>
-        <div class="project-card-footer">
-          <!-- ADD YOUR LINK HERE -->
-          <span class="project-link link-proto"><i class="fas fa-clock"></i> Coming Soon</span>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="skill-group-title">Tools &amp; Platforms</div>
+        <div class="tool-list">
+          <div class="tool-entry"><div class="tool-icon">📊</div><div class="tool-name">Microsoft Office Suite (Word, Excel, PowerPoint)</div></div>
+          <div class="tool-entry"><div class="tool-icon">🎨</div><div class="tool-name">Canva — Design &amp; Branding</div></div>
+          <div class="tool-entry"><div class="tool-icon">📁</div><div class="tool-name">Google Workspace (Docs, Sheets, Slides)</div></div>
+          <div class="tool-entry"><div class="tool-icon">📣</div><div class="tool-name">Social Media Management (Buffer, Hootsuite)</div></div>
+          <div class="tool-entry"><div class="tool-icon">🎬</div><div class="tool-name">Video Editing (iMovie, CapCut, Adobe Premiere Pro)</div></div>
+          <div class="tool-entry"><div class="tool-icon">🤝</div><div class="tool-name">Virtual Collaboration (Zoom, Slack, Trello)</div></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
-
-  <!-- ── CONTACT ── -->
-  <section id="contact">
-    <div class="section-header reveal">
-      <span class="section-label">// get in touch</span>
-      <h2 class="section-title">Connect & Collaborate</h2>
-    </div>
-    <div class="contact-wrapper reveal">
-      <p>Got questions, ideas, or want to invest? We'd love to hear from you.</p>
-      <a class="btn-primary" href="mailto:awclabs@gmail.com" style="display:inline-flex;margin:0 auto;">
-        <!-- ADD YOUR EMAIL CTA HERE -->
-        <i class="fas fa-paper-plane"></i> Send Us a Message
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="chapter-label" data-num="05" style="justify-content:center">Get In Touch</div>
+    <h2 class="contact-headline reveal">
+      Let's build something<br/><em>meaningful together.</em>
+    </h2>
+    <p class="contact-sub reveal">
+      Open to roles in global health organisations, project management, public health education, and creative partnerships. If your mission aligns — let's talk.
+    </p>
+    <div class="contact-grid reveal">
+      <a href="tel:+2347061844022" class="contact-tile">
+        <div class="ct-icon">📞</div>
+        <div><div class="ct-label">Phone</div><div class="ct-value">+234 706 184 4022</div></div>
       </a>
-      <div class="contact-links">
-        <!-- ADD / EDIT YOUR CONTACT LINKS BELOW -->
-        <a class="contact-link email" href="mailto:awclabs@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-        <a class="contact-link whatsapp" href="https://wa.me/2348077580631" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        <a class="contact-link linkedin" href="https://linkedin.com/company/awc-labs/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a class="contact-link facebook" href="https://web.facebook.com/AWClabs07" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-      </div>
-
-      <div style="margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border);">
-        <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.5rem;">
-          <i class="fas fa-handshake" style="color:var(--cyan); margin-right:0.4rem;"></i>
-          We welcome investors & collaborators. Support AWC Labs via:
-        </p>
-        <div class="support-row">
-          <a class="support-link support-coffee" href="https://buymeacoffee.com/abdul_writecodes" target="_blank"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-          <a class="support-link support-selar" href="https://selar.com/showlove/awc-labs" target="_blank"><i class="fas fa-heart"></i> Selar</a>
-        </div>
-      </div>
+      <a href="mailto:adeyemiomolade00@gmail.com" class="contact-tile">
+        <div class="ct-icon">✉️</div>
+        <div><div class="ct-label">Email</div><div class="ct-value">adeyemiomolade00@gmail.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/adeyemiomolade" target="_blank" rel="noopener" class="contact-tile">
+        <div class="ct-icon">💼</div>
+        <div><div class="ct-label">LinkedIn</div><div class="ct-value">Omolade Adeyemi</div></div>
+      </a>
     </div>
-  </section>
+    <div class="reveal">
+      <a href="mailto:adeyemiomolade00@gmail.com" class="btn-contact-main">
+        <span>Send a Message</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-  <!-- ── FOOTER ── -->
-  <footer>
-    &copy; <span id="yr"></span> <span>AWC Labs</span>. All rights reserved. &nbsp;|&nbsp; Building the AI-powered future.
-  </footer>
+<footer>
+  &copy; 2026 Omolade Adeyemi &nbsp;·&nbsp; Public Health Professional &nbsp;·&nbsp; Abuja, Nigeria
+</footer>
 
-  <script>
-    // Year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+<!-- PHOTO OVERLAY (shows if no photo loaded) -->
+<style>
+#heroPhoto{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;overflow:hidden;
+}
+</style>
 
-    // Mobile menu
-    const ham = document.getElementById('hamburger');
-    const mob = document.getElementById('mobileMenu');
-    ham.addEventListener('click', () => mob.classList.toggle('open'));
-    mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
 
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          obs.unobserve(e.target);
-        }
+// Hero entrance
+window.addEventListener('load', () => {
+  const lines = document.querySelectorAll('.hero-declaration .line span');
+  lines.forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), 200 + i * 250);
+  });
+  setTimeout(() => document.querySelector('.hero-name-row').classList.add('in'), 1100);
+  setTimeout(() => document.querySelector('.hero-tags').classList.add('in'), 1400);
+  setTimeout(() => document.querySelector('.hero-actions').classList.add('in'), 1600);
+  setTimeout(() => document.querySelector('.hero-scroll-hint').classList.add('in'), 2100);
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      // skill bars
+      e.target.querySelectorAll('.skill-fill').forEach(b => {
+        b.style.width = b.dataset.w + '%';
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(r => obs.observe(r));
-  </script>
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+
+// Also trigger skill fills when skills section visible
+const skillSec = document.getElementById('skills');
+new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) document.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+}, { threshold: 0.2 }).observe(skillSec);
+
+// Hamburger
+document.getElementById('ham').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navLinks').classList.remove('open');
+}));
+</script>
 </body>
-	</html>
+		</html>
