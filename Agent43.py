@@ -1,5 +1,5 @@
 """
-Agent43 — AI-Powered Academic Writing System
+Agent43 — AI-Powered Writing Copilot
 Single-file Streamlit application
 """
 
@@ -2510,10 +2510,10 @@ def page_write():
             <div class="hero-glow hero-glow-left"></div>
             <div class="hero-glow hero-glow-right"></div>
             <div class="hero-inner">
-                <div class="hero-eyebrow">AI-POWERED ACADEMIC WRITING SYSTEM</div>
+                <div class="hero-eyebrow">AI-POWERED WRITING CO-PILOT</div>
                 <h1 class="hero-title">Write with the precision<br>of a first-class scholar.</h1>
                 <p class="hero-subtitle">
-                    Nine specialist agents. Three disciplines. Citations sourced exclusively
+                    Nine specialist agents👽. Three disciplines. Citations sourced exclusively
                     from your uploaded references — zero hallucinations, every time.
                 </p>
             </div>
