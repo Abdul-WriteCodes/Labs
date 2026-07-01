@@ -1891,7 +1891,7 @@ def inject_css():
         margin-bottom: 1.1rem;
     }
     .hero-title {
-        font-size: 2.6rem !important;
+        font-size: clamp(1.6rem, 6vw, 2.6rem) !important;
         font-weight: 800 !important;
         color: #f1f5f9 !important;
         letter-spacing: -1.5px !important;
@@ -1972,6 +1972,42 @@ def inject_css():
     .hiw-text strong { display: block; font-size: 0.82rem; color: #cbd5e1; font-weight: 600; margin-bottom: 0.2rem; }
     .hiw-text span   { font-size: 0.75rem; color: #475569; line-height: 1.4; }
     .hiw-arrow { color: #1e293b; font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── Mobile responsiveness ────────────────────────────────────────── */
+    @media (max-width: 640px) {
+        .hero {
+            padding: 2rem 1.25rem 1.75rem;
+        }
+        .hero-subtitle {
+            font-size: 0.88rem;
+        }
+        .capability-grid {
+            grid-template-columns: 1fr;
+        }
+        .how-it-works {
+            padding: 1.25rem 1.25rem;
+        }
+        .hiw-steps {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .hiw-arrow {
+            display: none;
+        }
+        .page-header {
+            flex-direction: column;
+            padding: 1.5rem 1.5rem;
+        }
+        .page-header-badge {
+            margin-top: 0.75rem;
+        }
+        .assess-grid {
+            grid-template-columns: 1fr;
+        }
+        .writing-output {
+            padding: 1.5rem 1.25rem;
+        }
+    }
 
     /* ── Step headers ─────────────────────────────────────────────────── */
     .step-header {
