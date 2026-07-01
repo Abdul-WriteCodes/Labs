@@ -2088,6 +2088,62 @@ def inject_css():
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
+    /* ── Mobile responsive overrides ──────────────────────────────────── */
+    @media (max-width: 640px) {
+        .main .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        /* Page header */
+        .page-header {
+            flex-direction: column !important;
+            padding: 1.5rem 1.25rem !important;
+        }
+        .page-header-badge { margin-top: 0.75rem !important; }
+        .page-header-content h1 { font-size: 1.3rem !important; }
+
+        /* Hero */
+        .hero { padding: 2.5rem 1.25rem !important; }
+        .hero-title { font-size: 1.8rem !important; letter-spacing: -1px !important; }
+        .hero-subtitle { font-size: 0.88rem !important; }
+        .hero-glow { width: 220px !important; height: 220px !important; }
+
+        /* Capability grid → single column */
+        .capability-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+        }
+
+        /* How-it-works → stack vertically, hide arrows */
+        .how-it-works { padding: 1.25rem 1.25rem !important; }
+        .hiw-steps { flex-direction: column !important; align-items: flex-start !important; gap: 1rem !important; }
+        .hiw-step { min-width: 0 !important; width: 100% !important; }
+        .hiw-arrow { display: none !important; }
+
+        /* Assessment grid → single column */
+        .assess-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.75rem !important;
+        }
+        .assess-card { padding: 1.1rem 1.25rem !important; }
+        .assess-score { font-size: 1.9rem !important; }
+
+        /* Writing output panel */
+        .writing-output { padding: 1.5rem 1.25rem !important; }
+        .write-para { font-size: 0.88rem !important; }
+
+        /* Dispatch card */
+        .dispatch-card { padding: 1.1rem 1.25rem !important; }
+        .dispatch-card h3 { font-size: 1rem !important; }
+
+        /* Cost summary bar wraps on narrow screens */
+        .cost-summary-bar { flex-wrap: wrap !important; }
+
+        /* Auth card */
+        .auth-card { width: 92vw !important; padding: 1.75rem !important; }
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
