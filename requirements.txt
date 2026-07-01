@@ -1,0 +1,8 @@
+streamlit
+openai
+supabase
+tiktoken
+numpy
+PyPDF2
+python-docx
+scikit-learn
